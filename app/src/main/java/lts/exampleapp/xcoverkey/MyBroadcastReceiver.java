@@ -15,7 +15,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String intentAction = intent.getAction();
         if ("com.samsung.android.knox.intent.action.HARD_KEY_REPORT".equals(intentAction)) {
-            int keyCode = intent.getIntExtra(CustomDeviceManager.EXTRA_KEY_CODE, -1);
+            int keyCode = intent.getIntExtra(CustomDeviceManager.EXTRA_KEY_CODE, 0);
             int keyReportType = intent.getIntExtra(CustomDeviceManager.EXTRA_REPORT_TYPE, -1);
             if (keyCode == KEYCODE_PTT && keyReportType == 1) {
                 Toast.makeText(context, "XCover Key pressed!", Toast.LENGTH_SHORT).show();
@@ -24,6 +24,10 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
             else if (keyCode == KEYCODE_PTT && keyReportType == 2) {
                 Toast.makeText(context, "XCover Key released!", Toast.LENGTH_SHORT).show();
                 Log.println(Log.ERROR,"Xcover Key:","XCover Key Released!");
+            }
+            if (keyCode == KEYCODE_PTT && keyReportType == 4) {
+                Toast.makeText(context, "XCover Key Held!", Toast.LENGTH_SHORT).show();
+                Log.println(Log.ERROR,"Xcover Key:","XCover Key Held!");
             }
         }
     }
